@@ -31,21 +31,30 @@ namespace SchiffeVersenken
                     {
                         if (Enumerable.SequenceEqual(point, new int[] { y, x }))
                         {
+
+                            foreach (int[] killedPoint in ship.points)
+                            {
+                                Console.Clear();
+                                Board.InitBlankField(killedPoint[0], killedPoint[1], 3);
+                            }
+
                             bingo++;
-                            Console.WriteLine("You destroyed the ship " + shipNumber);
-                            Console.WriteLine($"{10 - bingo} to kill!");
-                            ship.points.Clear(); // before Clear() should all the point in this points be change to white!
-                            break;
+                            Console.WriteLine($"{10 - bingo} more ships to kill!");
+                            //Console.WriteLine("+++++++++++++++++++++++++++++++++++");
+                            //ship.points.Clear(); // before Clear() should all the point in this points be change to white!
+                            //break;
                         }
                     }
                 }
 
                 if (bingo == bingo_0)
                 {
-                    Console.WriteLine("You did not shoot any ship, try again!");
+                    Board.InitBlankField(y, x, 2);
+                    Console.WriteLine("Sorry, you did not shoot any ship, try again!");
                 }
-                
             }
+
+            Console.WriteLine("~~~~~~ YOU WON!!! ~~~~~~");
 
         }
 

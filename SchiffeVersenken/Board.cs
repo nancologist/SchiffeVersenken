@@ -20,6 +20,17 @@ namespace SchiffeVersenken
         public static int[,] field = new int[10, 10];
         public static int[,] blankField = new int[10, 10];
 
+        static Board()
+        {
+            for (int y = 0; y < blankField.GetLength(0); y++)
+            {
+                for (int x = 0; x < blankField.GetLength(1); x++)
+                {
+                    blankField[y, x] = 1;
+                }
+            }
+        }
+
         public Board()
         {
             ship5 = new Ship(5);
@@ -48,13 +59,41 @@ namespace SchiffeVersenken
             };
         }
 
-        public void InitBlankField()
+        public static void InitBlankField(int inputY = -1, int inputX = -1, int mode = 0)
         {
-            for (int y = 0; y < 10; y++)
+            if (inputX != -1 && mode == 3)
             {
-                for (int x = 0; x < 10; x++)
+                blankField[inputY, inputX] = 3;
+            }
+            
+            if (inputX != -1 && mode == 2)
+            {
+                blankField[inputY, inputX] = 2;
+            }
+
+            Console.WriteLine("   0   1   2   3   4   " +
+                "5   6    7   8    9\n");
+            for (int y = 0; y < blankField.GetLength(0); y++)
+            {
+                Console.Write(y + "  ");
+                for (int x = 0; x < blankField.GetLength(1); x++)
                 {
-                    Console.BackgroundColor = ConsoleColor.Blue;
+
+                    switch (blankField[y, x])
+                    {
+                        case 1: // sea
+                            Console.BackgroundColor = ConsoleColor.Blue;
+                            break;
+
+                        case 2: // shoot off target
+                            Console.BackgroundColor = ConsoleColor.DarkGray;
+                            break;
+
+                        case 3: //bingo
+                            Console.BackgroundColor = ConsoleColor.White;
+                            break;
+
+                    }
                     Console.Write("  ");
 
                     Console.BackgroundColor = ConsoleColor.Black;
@@ -90,8 +129,11 @@ namespace SchiffeVersenken
                 Console.WriteLine("\n");
             }
 
+            Console.WriteLine("   0   1   2   3   4   " +
+                                "5   6    7   8    9\n");
             for (int y = 0; y < field.GetLength(0); y++)
             {
+                Console.Write(y + "  ");
                 for (int x = 0; x < field.GetLength(1); x++)
                 {
                     
