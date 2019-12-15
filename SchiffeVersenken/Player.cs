@@ -41,8 +41,10 @@ namespace SchiffeVersenken
                             bingo++;
                             Console.WriteLine($"{10 - bingo} more ships to kill!");
                             //Console.WriteLine("+++++++++++++++++++++++++++++++++++");
-                            //ship.points.Clear(); // before Clear() should all the point in this points be change to white!
-                            //break;
+
+                            // we clear elements to remove the cheat-win-bug!!!!
+                            ship.points.Clear();
+                            break; // without break there is an error!
                         }
                     }
                 }
