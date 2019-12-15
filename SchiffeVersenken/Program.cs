@@ -8,12 +8,14 @@ namespace SchiffeVersenken
         {
 
             Board board = new Board();
-            board.InitField();
+            board.PositionShipsOnField();
+            Console.WriteLine("\n\n\n");
 
-            //int[,] realField = Board.field;
+            board.InitBlankField();
 
-            // i want to implement this "realField" in the class player
-            // i also need the list "readyToShip" to have the coordinates...
+            Player.Play(board);
+
+            //PlayGround.TestArrayEqauls();
 
             Console.ReadLine();
         }

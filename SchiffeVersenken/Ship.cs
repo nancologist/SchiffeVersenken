@@ -37,7 +37,7 @@ namespace SchiffeVersenken
 
         bool inComfortZone;
 
-        public List<int[]> readyToShip;
+        public List<int[]> points;
 
         Random random = new Random();
 
@@ -53,7 +53,7 @@ namespace SchiffeVersenken
             InitCoordinationsAndDirection();
             direction = SetDirection();
 
-            readyToShip = new List<int[]>();
+            points = new List<int[]>();
 
             int x_initVal = x;
             int y_initVal = y;
@@ -67,17 +67,17 @@ namespace SchiffeVersenken
                         {
                             if (i == x && j == y
                                 && y_initVal - y < shipSize
-                                && readyToShip.Count < shipSize)
+                                && points.Count < shipSize)
                             {
                                 
                                 if (field[j, i] != 1)
                                 {
-                                    readyToShip = new List<int[]>();
+                                    points = new List<int[]>();
                                     PlaceShip(field);
                                 }
                                 else
                                 {
-                                    readyToShip.Add(new int[] { j, i });
+                                    points.Add(new int[] { j, i });
                                 }
 
                                 y--;
@@ -94,16 +94,16 @@ namespace SchiffeVersenken
                         {
                             if (i == x && j == y
                                 && x - x_initVal < shipSize
-                                && readyToShip.Count < shipSize) // Diese letzte Beschränkung hat mich nach 2 Stunden gerettet!
+                                && points.Count < shipSize) // Diese letzte Beschränkung hat mich nach 2 Stunden gerettet!
                             {
                                 if (field[j, i] != 1)
                                 {
-                                    readyToShip = new List<int[]>();
+                                    points = new List<int[]>();
                                     PlaceShip(field);
                                 }
                                 else
                                 {
-                                    readyToShip.Add(new int[] { j, i });
+                                    points.Add(new int[] { j, i });
                                 }
 
                                 x++;
@@ -121,17 +121,17 @@ namespace SchiffeVersenken
                         {
                             if (i == x && j == y
                                 && y - y_initVal < shipSize
-                                && readyToShip.Count < shipSize)
+                                && points.Count < shipSize)
                             {
 
                                 if (field[j, i] != 1)
                                 {
-                                    readyToShip = new List<int[]>();
+                                    points = new List<int[]>();
                                     PlaceShip(field);
                                 }
                                 else
                                 {
-                                    readyToShip.Add(new int[] { j, i });
+                                    points.Add(new int[] { j, i });
                                 }
 
                                 y++;
@@ -149,17 +149,17 @@ namespace SchiffeVersenken
                         {
                             if (i == x && j == y
                                 && x_initVal - x < shipSize
-                                && readyToShip.Count < shipSize)
+                                && points.Count < shipSize)
                             {
 
                                 if (field[j, i] != 1)
                                 {
-                                    readyToShip = new List<int[]>();
+                                    points = new List<int[]>();
                                     PlaceShip(field);
                                 }
                                 else
                                 {
-                                    readyToShip.Add(new int[] { j, i });
+                                    points.Add(new int[] { j, i });
                                 }
 
                                 x--;
@@ -176,7 +176,7 @@ namespace SchiffeVersenken
                 $"{y_initVal}\ndirection: {direction}");
             
 
-            foreach (int[] coord in readyToShip)
+            foreach (int[] coord in points)
             {
                 field[coord[0], coord[1]] = color;
             }

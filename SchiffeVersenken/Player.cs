@@ -1,29 +1,45 @@
 ﻿using System;
+using System.Linq;
+
 namespace SchiffeVersenken
 {
     public class Player
     {
-        private int[,] blankField = new int[10, 10];
+        public static int bingo;
 
         public Player()
         {
         }
 
-        public void ShowBlankField()
+        public static void Play(Board board)
         {
-
-            for (int y = 0; y < blankField.GetLength(0); y++)
+            while (bingo < 10)
             {
-                for (int x = 0; x < blankField.GetLength(1); x++)
-                {
-                    blankField[y, x] = 1;
-                    Console.BackgroundColor = ConsoleColor.Blue;
-                    Console.Write("  ");
+                Console.Write("Enter x: ");
+                int x = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Enter y: ");
+                int y = Convert.ToInt32(Console.ReadLine());
 
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    Console.Write("  ");
+                int shipNumber = 0;
+                foreach (Ship ship in board.ships)
+                {
+                    shipNumber++;
+
+                    foreach(int[] point in ship.points)
+                    {
+                        if (Enumerable.SequenceEqual(point, new int[] { y, x }))
+                        {
+                            bingo++;
+                            Console.WriteLine("You banged the ship " + shipNumber);
+                            Console.WriteLine($"{10 - bingo} to kill!");
+                            ship.points.Clear();
+                            break;
+                        }
+                    }
+
                 }
-                Console.Write("\n\n");
+
+                Console.WriteLine("Sorry... try again!");
             }
 
         }

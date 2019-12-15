@@ -16,7 +16,9 @@ namespace SchiffeVersenken
         public Ship ship2_3;
         public Ship ship2_4;
         public List<Ship> ships;
+
         public static int[,] field = new int[10, 10];
+        public static int[,] blankField = new int[10, 10];
 
         public Board()
         {
@@ -46,8 +48,24 @@ namespace SchiffeVersenken
             };
         }
 
+        public void InitBlankField()
+        {
+            for (int y = 0; y < 10; y++)
+            {
+                for (int x = 0; x < 10; x++)
+                {
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                    Console.Write("  ");
 
-        public void InitField()
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.Write("  ");
+                }
+                Console.Write("\n\n");
+            }
+        }
+
+
+        public void PositionShipsOnField()
         {
 
             for (int y = 0; y < field.GetLength(0); y++)
@@ -63,9 +81,9 @@ namespace SchiffeVersenken
                 field = ship.PlaceShip(field);
 
                 Console.Write("Points -->");
-                foreach (int[] point in ship.readyToShip)
+                foreach (int[] point in ship.points)
                 {
-                    Console.Write($"(j={point[0]}, i:{point[1]}), ");
+                    Console.Write($"(j={point[0]}, i={point[1]}), ");
                     
                 }
                 Console.WriteLine("\n################################");

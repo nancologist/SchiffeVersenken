@@ -35,6 +35,7 @@
     <Compile Include="Ship.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PlayGround.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.txt" />
