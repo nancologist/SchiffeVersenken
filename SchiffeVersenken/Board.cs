@@ -90,7 +90,7 @@ namespace SchiffeVersenken
                             break;
 
                         case 3: //bingo
-                            Console.BackgroundColor = ConsoleColor.White;
+                            Console.BackgroundColor = ConsoleColor.Red;
                             break;
 
                     }

@@ -16,53 +16,79 @@ namespace SchiffeVersenken
             while (bingo < 10)
             {
                 int bingo_0 = bingo;
+                int x = -1;
+                int y = -1;
 
-                Console.Write("Enter x: ");
-                int x = Convert.ToInt32(Console.ReadLine());
-                Console.Write("Enter y: ");
-                int y = Convert.ToInt32(Console.ReadLine());
-
-                int shipNumber = 0;
-                foreach (Ship ship in board.ships)
+                // Try&Catch: Damit wenn der User aus Versehen eine andere Taste wie "Enter" druckt, der Programm uns nicht rausschmeißt
+                try
                 {
-                    shipNumber++;
+                    AskUserToShoot(x, y, bingo_0, board);
+                }
+                catch (FormatException)
+                {
+                    Console.Write("Invalid input. Do you want to leave the game? (y/n): ");
+                    string answer = Console.ReadLine().ToLower();
 
-                    foreach(int[] point in ship.points)
+                    if (answer == "n")
                     {
-                        if (Enumerable.SequenceEqual(point, new int[] { y, x }))
-                        {
-
-                            foreach (int[] killedPoint in ship.points)
-                            {
-                                Console.Clear();
-                                Board.InitBlankField(killedPoint[0], killedPoint[1], 3);
-                            }
-
-                            bingo++;
-                            Console.WriteLine($"{10 - bingo} more ships to kill!");
-                            //Console.WriteLine("+++++++++++++++++++++++++++++++++++");
-
-                            // we clear elements to remove the cheat-win-bug!!!!
-                            ship.points.Clear();
-                            break; // without break there is an error!
-                        }
+                        AskUserToShoot(x, y, bingo_0, board);
+                    }
+                    else
+                    {
+                        Console.WriteLine("You left the game... :(");
+                        break;
                     }
                 }
 
-                if (bingo == bingo_0)
-                {
-                    Board.InitBlankField(y, x, 2);
-                    Console.WriteLine("Sorry, you did not shoot any ship, try again!");
-                }
+                
             }
 
-            Console.WriteLine("~~~~~~ YOU WON!!! ~~~~~~");
+            if (bingo == 10)
+            {
+                Console.WriteLine("~~~~~~ YOU WON!!! ~~~~~~");
+            }
 
         }
 
-        public void AskUserToShoot()
+        public static void AskUserToShoot(int x, int y, int bingo_0, Board board)
         {
+            Console.Write("Enter x: ");
+            x = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter y: ");
+            y = Convert.ToInt32(Console.ReadLine());
+            int shipNumber = 0;
+            foreach (Ship ship in board.ships)
+            {
+                shipNumber++;
 
+                foreach (int[] point in ship.points)
+                {
+                    if (Enumerable.SequenceEqual(point, new int[] { y, x }))
+                    {
+
+                        foreach (int[] killedPoint in ship.points)
+                        {
+                            Console.Clear();
+                            Board.InitBlankField(killedPoint[0], killedPoint[1], 3);
+                        }
+
+                        bingo++;
+                        Console.WriteLine($"Bingo! {10 - bingo} more ships to kill!");
+                        //Console.WriteLine("+++++++++++++++++++++++++++++++++++");
+
+                        // we clear elements to remove the cheat-win-bug!!!!
+                        ship.points.Clear();
+                        break; // without break there is an error!
+                    }
+                }
+            }
+
+            if (bingo == bingo_0)
+            {
+                Board.InitBlankField(y, x, 2);
+                Console.WriteLine("Sorry, you did not shoot any ship, try again!");
+                Console.WriteLine($"Only {10 - bingo} more ships!");
+            }
         }
 
     }
