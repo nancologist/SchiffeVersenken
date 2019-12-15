@@ -15,6 +15,8 @@ namespace SchiffeVersenken
         {
             while (bingo < 10)
             {
+                int bingo_0 = bingo;
+
                 Console.Write("Enter x: ");
                 int x = Convert.ToInt32(Console.ReadLine());
                 Console.Write("Enter y: ");
@@ -30,16 +32,19 @@ namespace SchiffeVersenken
                         if (Enumerable.SequenceEqual(point, new int[] { y, x }))
                         {
                             bingo++;
-                            Console.WriteLine("You banged the ship " + shipNumber);
+                            Console.WriteLine("You destroyed the ship " + shipNumber);
                             Console.WriteLine($"{10 - bingo} to kill!");
-                            ship.points.Clear();
+                            ship.points.Clear(); // before Clear() should all the point in this points be change to white!
                             break;
                         }
                     }
-
                 }
 
-                Console.WriteLine("Sorry... try again!");
+                if (bingo == bingo_0)
+                {
+                    Console.WriteLine("You did not shoot any ship, try again!");
+                }
+                
             }
 
         }
