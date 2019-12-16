@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace SchiffeVersenken
 {
     // TODO modify the Access Modifiers
+    // Todo All magic numbers should be replaced 
     public class Ship
     {
         const int FIELD_SIZE = 9;
@@ -61,25 +62,84 @@ namespace SchiffeVersenken
             switch (direction)
             {
                 case 1:
+
+                    // vorne und hinten des Schiffes soll frei sein
+                    if (y_initVal == 9)
+                    {
+                        if (field[y_initVal - shipSize, x_initVal] != 1)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    else if (y_initVal <= shipSize)
+                    {
+                        if (field[y_initVal + 1, x_initVal] != 1)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    else
+                    {
+                        if (field[y_initVal + 1, x_initVal] != 1 ||
+                        field[y_initVal - shipSize, x_initVal] != 1)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+
+
                     for (int j = field.GetLength(0) - 1; j >= 0; j--)
                     {
                         for (int i = 0; i < field.GetLength(1); i++)
                         {
+
                             if (i == x && j == y
                                 && y_initVal - y < shipSize
                                 && points.Count < shipSize)
                             {
-                                
-                                if (field[j, i] != 1)
+                                if (i == 0)
                                 {
-                                    points.Clear();
-                                    PlaceShip(field);
+                                    if (field[j, i] != 1 || field[j, i+1] != 1)
+                                    {
+                                        points.Clear();
+                                        PlaceShip(field);
+                                    }
+                                    else
+                                    {
+                                        points.Add(new int[] { j, i });
+                                    }
+                                }
+                                else if (i == 9)
+                                {
+                                    if (field[j, i] != 1 || field[j, i -1] != 1)
+                                    {
+                                        points.Clear();
+                                        PlaceShip(field);
+                                    }
+                                    else
+                                    {
+                                        points.Add(new int[] { j, i });
+                                    }
                                 }
                                 else
                                 {
-                                    points.Add(new int[] { j, i });
+                                    if (field[j, i] != 1 || field[j, i - 1] != 1
+                                        || field[j, i + 1] != 1)
+                                    {
+                                        points.Clear();
+                                        PlaceShip(field);
+                                    }
+                                    else
+                                    {
+                                        points.Add(new int[] { j, i });
+                                    }
                                 }
 
+
+                                
                                 y--;
                             }
 
@@ -88,6 +148,34 @@ namespace SchiffeVersenken
                     break;
 
                 case 2:
+
+                    if (x_initVal == 0)
+                    {
+                        if (field[y_initVal, x_initVal + shipSize] != 1)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    else if (x_initVal == 9 - shipSize + 1)
+                    {
+                        if (field[y_initVal, x_initVal - 1] != 1)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    else
+                    {
+                        if (field[y_initVal, x_initVal - 1] != 1 ||
+                        field[y_initVal, x_initVal + shipSize] != 1)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+
+
                     for (int j = 0; j < field.GetLength(0); j++)
                     {
                         for (int i = 0; i < field.GetLength(1); i++)
@@ -96,15 +184,53 @@ namespace SchiffeVersenken
                                 && x - x_initVal < shipSize
                                 && points.Count < shipSize) // Diese letzte Beschränkung hat mich nach 2 Stunden gerettet!
                             {
-                                if (field[j, i] != 1)
+                                if (j == 0)
                                 {
-                                    points.Clear();
-                                    PlaceShip(field);
+                                    if (field[j, i] != 1 || field[j + 1, i ] != 1)
+                                    {
+                                        points.Clear();
+                                        PlaceShip(field);
+                                    }
+                                    else
+                                    {
+                                        points.Add(new int[] { j, i });
+                                    }
+                                }
+                                else if (j == 9)
+                                {
+                                    if (field[j, i] != 1 || field[j - 1, i ] != 1)
+                                    {
+                                        points.Clear();
+                                        PlaceShip(field);
+                                    }
+                                    else
+                                    {
+                                        points.Add(new int[] { j, i });
+                                    }
                                 }
                                 else
                                 {
-                                    points.Add(new int[] { j, i });
+                                    if (field[j, i] != 1 || field[j - 1, i ] != 1
+                                        || field[j + 1, i ] != 1)
+                                    {
+                                        points.Clear();
+                                        PlaceShip(field);
+                                    }
+                                    else
+                                    {
+                                        points.Add(new int[] { j, i });
+                                    }
                                 }
+
+                                //if (field[j, i] != 1)
+                                //{
+                                //    points.Clear();
+                                //    PlaceShip(field);
+                                //}
+                                //else
+                                //{
+                                //    points.Add(new int[] { j, i });
+                                //}
 
                                 x++;
 
@@ -115,6 +241,35 @@ namespace SchiffeVersenken
                     break;
 
                 case 3:
+
+                    if (y_initVal == 0)
+                    {
+                        if (field[y_initVal + shipSize, x_initVal] != 1)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    else if (y_initVal == 9 - shipSize + 1)
+                    {
+                        if (field[y_initVal - 1, x_initVal] != 1)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    else
+                    {
+                        if (field[y_initVal - 1, x_initVal] != 1 ||
+                        field[y_initVal + shipSize, x_initVal] != 1)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+
+
+
                     for (int j = 0; j < field.GetLength(0); j++)
                     {
                         for (int i = 0; i < field.GetLength(1); i++)
@@ -124,15 +279,53 @@ namespace SchiffeVersenken
                                 && points.Count < shipSize)
                             {
 
-                                if (field[j, i] != 1)
+                                if (i == 0)
                                 {
-                                    points.Clear();
-                                    PlaceShip(field);
+                                    if (field[j, i] != 1 || field[j, i + 1] != 1)
+                                    {
+                                        points.Clear();
+                                        PlaceShip(field);
+                                    }
+                                    else
+                                    {
+                                        points.Add(new int[] { j, i });
+                                    }
+                                }
+                                else if (i == 9)
+                                {
+                                    if (field[j, i] != 1 || field[j, i - 1] != 1)
+                                    {
+                                        points.Clear();
+                                        PlaceShip(field);
+                                    }
+                                    else
+                                    {
+                                        points.Add(new int[] { j, i });
+                                    }
                                 }
                                 else
                                 {
-                                    points.Add(new int[] { j, i });
+                                    if (field[j, i] != 1 || field[j, i - 1] != 1
+                                        || field[j, i + 1] != 1)
+                                    {
+                                        points.Clear();
+                                        PlaceShip(field);
+                                    }
+                                    else
+                                    {
+                                        points.Add(new int[] { j, i });
+                                    }
                                 }
+
+                                //if (field[j, i] != 1)
+                                //{
+                                //    points.Clear();
+                                //    PlaceShip(field);
+                                //}
+                                //else
+                                //{
+                                //    points.Add(new int[] { j, i });
+                                //}
 
                                 y++;
 
@@ -143,6 +336,35 @@ namespace SchiffeVersenken
                     break;
 
                 case 4:
+
+                    // vorne und hinten des Schiffes soll frei sein
+                    if (x_initVal == 9)
+                    {
+                        if (field[y_initVal, x_initVal - shipSize] != 1)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    else if (x_initVal <= shipSize)
+                    {
+                        if (field[y_initVal, x_initVal + 1] != 1)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    else
+                    {
+                        if (field[y_initVal, x_initVal + 1] != 1 ||
+                        field[y_initVal, x_initVal - shipSize] != 1)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+
+
                     for (int j = 0; j < field.GetLength(0); j++)
                     {
                         for (int i = field.GetLength(1) - 1; i >= 0; i--)
@@ -152,15 +374,53 @@ namespace SchiffeVersenken
                                 && points.Count < shipSize)
                             {
 
-                                if (field[j, i] != 1)
+                                if (j == 0)
                                 {
-                                    points.Clear();
-                                    PlaceShip(field);
+                                    if (field[j, i] != 1 || field[j + 1, i] != 1)
+                                    {
+                                        points.Clear();
+                                        PlaceShip(field);
+                                    }
+                                    else
+                                    {
+                                        points.Add(new int[] { j, i });
+                                    }
+                                }
+                                else if (j == 9)
+                                {
+                                    if (field[j, i] != 1 || field[j - 1, i] != 1)
+                                    {
+                                        points.Clear();
+                                        PlaceShip(field);
+                                    }
+                                    else
+                                    {
+                                        points.Add(new int[] { j, i });
+                                    }
                                 }
                                 else
                                 {
-                                    points.Add(new int[] { j, i });
+                                    if (field[j, i] != 1 || field[j - 1, i] != 1
+                                        || field[j + 1, i] != 1)
+                                    {
+                                        points.Clear();
+                                        PlaceShip(field);
+                                    }
+                                    else
+                                    {
+                                        points.Add(new int[] { j, i });
+                                    }
                                 }
+
+                                //if (field[j, i] != 1)
+                                //{
+                                //    points.Clear();
+                                //    PlaceShip(field);
+                                //}
+                                //else
+                                //{
+                                //    points.Add(new int[] { j, i });
+                                //}
 
                                 x--;
 
