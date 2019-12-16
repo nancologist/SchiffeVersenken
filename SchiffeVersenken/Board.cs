@@ -59,16 +59,16 @@ namespace SchiffeVersenken
             };
         }
 
-        public static void InitBlankField(int inputY = -1, int inputX = -1, int mode = 0)
+        public static void InitBlankField(int[] inputPoint = null, int mode = 0)
         {
-            if (inputX != -1 && mode == 3)
+            if (inputPoint != null && mode == 3)
             {
-                blankField[inputY, inputX] = 3;
+                blankField[inputPoint[0], inputPoint[1]] = mode;
             }
             
-            if (inputX != -1 && mode == 2)
+            if (inputPoint != null && mode == 2)
             {
-                blankField[inputY, inputX] = 2;
+                blankField[inputPoint[0], inputPoint[1]] = mode;
             }
 
             Console.WriteLine("   0   1   2   3   4   " +

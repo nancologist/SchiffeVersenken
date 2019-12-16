@@ -77,19 +77,12 @@ namespace SchiffeVersenken
                 {
                     if (Enumerable.SequenceEqual(point, new int[] { y, x }))
                     {
-
-                        foreach (int[] killedPoint in ship.points)
-                        {
-                            Console.Clear();
-                            Board.InitBlankField(killedPoint[0], killedPoint[1], 3);
-                        }
+                        Board.InitBlankField(point, 3);
 
                         bingo++;
                         Console.WriteLine($"Bingo! {10 - bingo} more ships to kill!");
                         //Console.WriteLine("+++++++++++++++++++++++++++++++++++");
 
-                        // we clear elements to remove the cheat-win-bug!!!!
-                        ship.points.Clear();
                         break; // without break there is an error!
                     }
                 }
@@ -97,7 +90,8 @@ namespace SchiffeVersenken
 
             if (bingo == bingo_0)
             {
-                Board.InitBlankField(y, x, 2);
+
+                Board.InitBlankField(new int[] {y, x}, 2);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Sorry, you did not shoot any ship, try again!");
                 Console.WriteLine($"Only {10 - bingo} more ships!");
