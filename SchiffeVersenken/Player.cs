@@ -7,10 +7,6 @@ namespace SchiffeVersenken
     {
         public static int bingo;
 
-        public Player()
-        {
-        }
-
         public static void Play(Board board)
         {
             while (bingo < 10)

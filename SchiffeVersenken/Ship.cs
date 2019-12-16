@@ -38,6 +38,7 @@ namespace SchiffeVersenken
         bool inComfortZone;
 
         public List<int[]> points;
+        public List<int[]> adjacents;
 
         Random random = new Random();
 
@@ -54,6 +55,7 @@ namespace SchiffeVersenken
             direction = SetDirection();
 
             points = new List<int[]>();
+            adjacents = new List<int[]>();
 
             int x_initVal = x;
             int y_initVal = y;
@@ -75,9 +77,27 @@ namespace SchiffeVersenken
                                     points = new List<int[]>();
                                     PlaceShip(field);
                                 }
+
                                 else
                                 {
                                     points.Add(new int[] { j, i });
+
+
+                                    // entlang des Schiffs
+                                    if (i > 0 && i < 9)
+                                    {
+                                        adjacents.Add(new int[] { j, i + 1 });
+                                        adjacents.Add(new int[] { j, i - 1 });
+                                    }
+                                    else if (i == 0)
+                                    {
+                                        adjacents.Add(new int[] { j, i + 1 });
+                                    }
+                                    else
+                                    {
+                                        adjacents.Add(new int[] { j, i - 1 });
+                                    }
+
                                 }
 
                                 y--;
@@ -104,6 +124,21 @@ namespace SchiffeVersenken
                                 else
                                 {
                                     points.Add(new int[] { j, i });
+
+                                    // entlang des Schiffs
+                                    if (j > 0 && j < 9)
+                                    {
+                                        adjacents.Add(new int[] { j + 1, i});
+                                        adjacents.Add(new int[] { j - 1, i});
+                                    }
+                                    else if (j == 0)
+                                    {
+                                        adjacents.Add(new int[] { j + 1, i });
+                                    }
+                                    else
+                                    {
+                                        adjacents.Add(new int[] { j - 1, i });
+                                    }
                                 }
 
                                 x++;
@@ -132,6 +167,21 @@ namespace SchiffeVersenken
                                 else
                                 {
                                     points.Add(new int[] { j, i });
+
+                                    // entlang des Schiffs
+                                    if (i > 0 && i < 9)
+                                    {
+                                        adjacents.Add(new int[] { j, i + 1 });
+                                        adjacents.Add(new int[] { j, i - 1 });
+                                    }
+                                    else if (i == 0)
+                                    {
+                                        adjacents.Add(new int[] { j, i + 1 });
+                                    }
+                                    else
+                                    {
+                                        adjacents.Add(new int[] { j, i - 1 });
+                                    }
                                 }
 
                                 y++;
@@ -160,6 +210,21 @@ namespace SchiffeVersenken
                                 else
                                 {
                                     points.Add(new int[] { j, i });
+
+                                    // entlang des Schiffs
+                                    if (j > 0 && j < 9)
+                                    {
+                                        adjacents.Add(new int[] { j + 1, i });
+                                        adjacents.Add(new int[] { j - 1, i });
+                                    }
+                                    else if (j == 0)
+                                    {
+                                        adjacents.Add(new int[] { j + 1, i });
+                                    }
+                                    else
+                                    {
+                                        adjacents.Add(new int[] { j - 1, i });
+                                    }
                                 }
 
                                 x--;
@@ -179,6 +244,11 @@ namespace SchiffeVersenken
             foreach (int[] coord in points)
             {
                 field[coord[0], coord[1]] = color;
+            }
+
+            foreach(int[] adjacent in adjacents)
+            {
+                field[adjacent[0], adjacent[1]] = 99;
             }
 
             return field;

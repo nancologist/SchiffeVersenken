@@ -18,15 +18,15 @@ namespace SchiffeVersenken
         public List<Ship> ships;
 
         public static int[,] field = new int[10, 10];
-        public static int[,] blankField = new int[10, 10];
+        public static int[,] hiddenField = new int[10, 10];
 
         static Board()
         {
-            for (int y = 0; y < blankField.GetLength(0); y++)
+            for (int y = 0; y < hiddenField.GetLength(0); y++)
             {
-                for (int x = 0; x < blankField.GetLength(1); x++)
+                for (int x = 0; x < hiddenField.GetLength(1); x++)
                 {
-                    blankField[y, x] = 1;
+                    hiddenField[y, x] = 1;
                 }
             }
         }
@@ -63,30 +63,30 @@ namespace SchiffeVersenken
         {
             if (inputX != -1 && mode == 3)
             {
-                blankField[inputY, inputX] = 3;
+                hiddenField[inputY, inputX] = 3;
             }
             
             if (inputX != -1 && mode == 2)
             {
-                blankField[inputY, inputX] = 2;
+                hiddenField[inputY, inputX] = 2;
             }
 
             Console.WriteLine("   0   1   2   3   4   " +
                 "5   6    7   8    9\n");
-            for (int y = 0; y < blankField.GetLength(0); y++)
+            for (int y = 0; y < hiddenField.GetLength(0); y++)
             {
                 Console.Write(y + "  ");
-                for (int x = 0; x < blankField.GetLength(1); x++)
+                for (int x = 0; x < hiddenField.GetLength(1); x++)
                 {
 
-                    switch (blankField[y, x])
+                    switch (hiddenField[y, x])
                     {
                         case 1: // sea
                             Console.BackgroundColor = ConsoleColor.Blue;
                             break;
 
                         case 2: // shoot off target
-                            Console.BackgroundColor = ConsoleColor.DarkGray;
+                            Console.BackgroundColor = ConsoleColor.Gray;
                             break;
 
                         case 3: //bingo
@@ -140,6 +140,7 @@ namespace SchiffeVersenken
                     switch (field[y, x])
                     {
                         case 1: // sea
+                        case 99: // adjacents
                             Console.BackgroundColor = ConsoleColor.Blue;
                             break;
 
