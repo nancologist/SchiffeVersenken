@@ -72,7 +72,7 @@ namespace SchiffeVersenken
                                 
                                 if (field[j, i] != 1)
                                 {
-                                    points = new List<int[]>();
+                                    points.Clear();
                                     PlaceShip(field);
                                 }
                                 else
@@ -98,7 +98,7 @@ namespace SchiffeVersenken
                             {
                                 if (field[j, i] != 1)
                                 {
-                                    points = new List<int[]>();
+                                    points.Clear();
                                     PlaceShip(field);
                                 }
                                 else
@@ -126,7 +126,7 @@ namespace SchiffeVersenken
 
                                 if (field[j, i] != 1)
                                 {
-                                    points = new List<int[]>();
+                                    points.Clear();
                                     PlaceShip(field);
                                 }
                                 else
@@ -154,7 +154,7 @@ namespace SchiffeVersenken
 
                                 if (field[j, i] != 1)
                                 {
-                                    points = new List<int[]>();
+                                    points.Clear();
                                     PlaceShip(field);
                                 }
                                 else
