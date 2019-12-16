@@ -53,10 +53,6 @@ namespace SchiffeVersenken
                 
             }
 
-            if (bingo == 10)
-            {
-                Console.WriteLine("~~~~~~ YOU WON!!! ~~~~~~");
-            }
 
         }
 
