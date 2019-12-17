@@ -13,8 +13,10 @@ namespace SchiffeVersenken
 
         public static void Play(Board board)
         {
-            while (bingo < 10)
+            while (true)
             {
+
+                // TODO bingo muss modfiziert werden... aber ich kann es nicht löschen einfach so...
                 int bingo_0 = bingo;
                 int x = -1;
                 int y = -1;
@@ -64,34 +66,32 @@ namespace SchiffeVersenken
             x = Convert.ToInt32(Console.ReadLine());
             Console.Write("Enter y: ");
             y = Convert.ToInt32(Console.ReadLine());
-            int shipNumber = 0;
+
+            int[] shot = {y, x};
+            bool hit = false;
+
             foreach (Ship ship in board.ships)
             {
-                shipNumber++;
 
                 foreach (int[] point in ship.points)
                 {
-                    if (Enumerable.SequenceEqual(point, new int[] { y, x }))
+                    if (Enumerable.SequenceEqual(point, shot))
                     {
+                        hit = true;
                         Board.InitBlankField(point, 3);
 
-                        bingo++;
-                        Console.WriteLine($"Bingo! {10 - bingo} more ships to kill!");
-                        //Console.WriteLine("+++++++++++++++++++++++++++++++++++");
-
-                        break; // without break there is an error!
+                        break;
                     }
+                    
                 }
+
             }
 
-            if (bingo == bingo_0)
+            if (!hit)
             {
-
-                Board.InitBlankField(new int[] {y, x}, 2);
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Sorry, you did not shoot any ship, try again!");
-                Console.WriteLine($"Only {10 - bingo} more ships!");
+                Board.InitBlankField(shot, 2);
             }
+
         }
 
     }

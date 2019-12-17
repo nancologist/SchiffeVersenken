@@ -140,7 +140,6 @@ namespace SchiffeVersenken
                     switch (field[y, x])
                     {
                         case 1: // sea
-                        case 99: // adjacents
                             Console.BackgroundColor = ConsoleColor.Blue;
                             break;
 

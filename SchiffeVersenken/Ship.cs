@@ -157,7 +157,7 @@ namespace SchiffeVersenken
                             PlaceShip(field);
                         }
                     }
-                    else if (x_initVal == 9 - shipSize + 1)
+                    else if (x_initVal >= 9 - shipSize + 1)
                     {
                         if (field[y_initVal, x_initVal - 1] != 1)
                         {
@@ -250,7 +250,7 @@ namespace SchiffeVersenken
                             PlaceShip(field);
                         }
                     }
-                    else if (y_initVal == 9 - shipSize + 1)
+                    else if (y_initVal >= 9 - shipSize + 1)
                     {
                         if (field[y_initVal - 1, x_initVal] != 1)
                         {
