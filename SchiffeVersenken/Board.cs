@@ -5,6 +5,8 @@ namespace SchiffeVersenken
 {
     public class Board
     {
+        private const int FIELD_SIZE = 10;
+
         public Ship ship5;
         public Ship ship4_1;
         public Ship ship4_2;
@@ -17,8 +19,8 @@ namespace SchiffeVersenken
         public Ship ship2_4;
         public List<Ship> ships;
 
-        public static int[,] field = new int[10, 10];
-        public static int[,] hiddenField = new int[10, 10];
+        public static int[,] field = new int[FIELD_SIZE, FIELD_SIZE];
+        public static int[,] hiddenField = new int[FIELD_SIZE, FIELD_SIZE];
 
         static Board()
         {
