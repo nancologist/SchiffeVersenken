@@ -15,24 +15,18 @@ namespace SchiffeVersenken
         {
             while (true)
             {
-
-                // TODO bingo muss modfiziert werden... aber ich kann es nicht löschen einfach so...
-                int bingo_0 = bingo;
                 int x = -1;
                 int y = -1;
 
-                // Try&Catch:
-                // Catch1: Wenn der User eine Zahl größer als neun eingibt...
-                // Catch2: Damit wenn der User aus Versehen eine andere Taste wie "Enter" druckt, der Programm uns nicht rausschmeißt
                 try
                 {
-                    AskUserToShoot(x, y, bingo_0, board);
+                    AskUserToShoot(x, y, board);
                 }
                 catch (IndexOutOfRangeException)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("The input number should be between 0 and 9 (inclusive)");
-                    AskUserToShoot(x, y, bingo_0, board);
+                    AskUserToShoot(x, y, board);
                 }
                 catch (FormatException)
                 {
@@ -43,27 +37,24 @@ namespace SchiffeVersenken
 
                     if (answer == "n")
                     {
-                        AskUserToShoot(x, y, bingo_0, board);
+                        AskUserToShoot(x, y, board);
                     }
                     else
                     {
                         Console.WriteLine("You left the game... :(");
                         break;
                     }
-                }
-
-                
+                }  
             }
-
-
         }
 
-        public static void AskUserToShoot(int x, int y, int bingo_0, Board board)
+        public static void AskUserToShoot(int x, int y, Board board)
         {
             Console.ForegroundColor = ConsoleColor.Green;
 
             Console.Write("Enter x: ");
             x = Convert.ToInt32(Console.ReadLine());
+
             Console.Write("Enter y: ");
             y = Convert.ToInt32(Console.ReadLine());
 
