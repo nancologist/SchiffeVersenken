@@ -7,7 +7,7 @@ namespace SchiffeVersenken
     // Todo All magic numbers should be replaced 
     public class Ship
     {
-        const int FIELD_SIZE = 9;
+        private const int FIELD_SIZE = 10;
 
         const int NORTH = 1;
         const int EAST = 2;
@@ -72,7 +72,7 @@ namespace SchiffeVersenken
                             PlaceShip(field);
                         }
                     }
-                    else if (y_initVal <= shipSize)
+                    else if (y_initVal < shipSize)
                     {
                         if (field[y_initVal + 1, x_initVal] != 1)
                         {
@@ -346,7 +346,7 @@ namespace SchiffeVersenken
                             PlaceShip(field);
                         }
                     }
-                    else if (x_initVal <= shipSize)
+                    else if (x_initVal < shipSize)
                     {
                         if (field[y_initVal, x_initVal + 1] != 1)
                         {
@@ -536,8 +536,8 @@ namespace SchiffeVersenken
 
         public void InitCoordinationsAndDirection()
         {
-            this.x = random.Next(0, FIELD_SIZE + 1);
-            this.y = random.Next(0, FIELD_SIZE + 1);
+            this.x = random.Next(0, FIELD_SIZE);
+            this.y = random.Next(0, FIELD_SIZE);
             this.direction = random.Next(1, 5);
 
             // - DEBUG - 
@@ -545,9 +545,9 @@ namespace SchiffeVersenken
 
             // check position of ship
             xInComfortZoneLeft = x >= shipSize - 1;
-            xInComfortZoneRight = x <= FIELD_SIZE - shipSize;
+            xInComfortZoneRight = x <= FIELD_SIZE - shipSize - 1;
             yInComfortZoneTop = y >= shipSize - 1;
-            yInComfortZoneBottom = y <= FIELD_SIZE - shipSize;
+            yInComfortZoneBottom = y <= FIELD_SIZE - shipSize - 1;
 
             xInComfortZone = (xInComfortZoneLeft && xInComfortZoneRight);
             yInComfortZone = (yInComfortZoneTop && yInComfortZoneBottom);

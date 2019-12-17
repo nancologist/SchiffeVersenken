@@ -68,7 +68,7 @@ namespace SchiffeVersenken
             y = Convert.ToInt32(Console.ReadLine());
 
             int[] shot = {y, x};
-            bool hit = false;
+            bool isShiptHit = false;
 
             foreach (Ship ship in board.ships)
             {
@@ -77,8 +77,8 @@ namespace SchiffeVersenken
                 {
                     if (Enumerable.SequenceEqual(point, shot))
                     {
-                        hit = true;
-                        Board.InitHiddenField(point, hit);
+                        isShiptHit = true;
+                        Board.InitHiddenField(point, isShiptHit);
 
                         break;
                     }
@@ -87,10 +87,7 @@ namespace SchiffeVersenken
 
             }
 
-            if (!hit)
-            {
-                Board.InitHiddenField(shot, hit);
-            }
+            Board.InitHiddenField(shot, isShiptHit);
 
         }
 
