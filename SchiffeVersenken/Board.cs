@@ -6,6 +6,8 @@ namespace SchiffeVersenken
     public class Board
     {
         private const int FIELD_SIZE = 10;
+        private const int ON_TARGET = 3;
+        private const int OFF_TARGET = 2;
 
         public Ship ship5;
         public Ship ship4_1;
@@ -24,9 +26,9 @@ namespace SchiffeVersenken
 
         static Board()
         {
-            for (int y = 0; y < hiddenField.GetLength(0); y++)
+            for (int y = 0; y < FIELD_SIZE; y++)
             {
-                for (int x = 0; x < hiddenField.GetLength(1); x++)
+                for (int x = 0; x < FIELD_SIZE; x++)
                 {
                     hiddenField[y, x] = 1;
                 }
@@ -61,16 +63,16 @@ namespace SchiffeVersenken
             };
         }
 
-        public static void InitBlankField(int[] inputPoint = null, int mode = 0)
+        public static void InitHiddenField(int[] inputPoint = null, bool hitShip = false)
         {
-            if (inputPoint != null && mode == 3)
+            if (inputPoint != null && hitShip)
             {
-                hiddenField[inputPoint[0], inputPoint[1]] = mode;
+                hiddenField[inputPoint[0], inputPoint[1]] = ON_TARGET;
             }
             
-            if (inputPoint != null && mode == 2)
+            if (inputPoint != null && !hitShip)
             {
-                hiddenField[inputPoint[0], inputPoint[1]] = mode;
+                hiddenField[inputPoint[0], inputPoint[1]] = OFF_TARGET;
             }
 
             Console.WriteLine("   0   1   2   3   4   " +

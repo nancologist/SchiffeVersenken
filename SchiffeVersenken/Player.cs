@@ -78,7 +78,7 @@ namespace SchiffeVersenken
                     if (Enumerable.SequenceEqual(point, shot))
                     {
                         hit = true;
-                        Board.InitBlankField(point, 3);
+                        Board.InitHiddenField(point, hit);
 
                         break;
                     }
@@ -89,7 +89,7 @@ namespace SchiffeVersenken
 
             if (!hit)
             {
-                Board.InitBlankField(shot, 2);
+                Board.InitHiddenField(shot, hit);
             }
 
         }
