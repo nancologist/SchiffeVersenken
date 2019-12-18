@@ -62,91 +62,19 @@ namespace SchiffeVersenken
             // TODO : Check class maybe...
             // TODO : iterate methode maybe....
 
+
             switch (direction)
             {
                 case NORTH:
-
+                case SOUTH:
                     CheckHeadAndTailOfShip(y_initVal, x_initVal, direction, field);
-
                     IterateField(y_initVal, direction, field);
-
-                    //for (int j = FIELD_SIZE - 1; j >= 0; j--)
-                    //{
-                    //    for (int i = 0; i < FIELD_SIZE; i++)
-                    //    {
-                    //        if (i == x && j == y
-                    //            && y_initVal - y < shipSize
-                    //            && points.Count < shipSize)
-                    //        {
-                    //            CheckSidesOfShip(i, j, "vertical",field);
-                    //            y--;
-                    //        }
-                    //    }
-                    //}
                     break;
 
                 case EAST:
-
-                    CheckHeadAndTailOfShip(y_initVal, x_initVal, direction, field);
-
-                    IterateField(x_initVal, direction, field);
-
-                    //for (int j = 0; j < FIELD_SIZE; j++)
-                    //{
-                    //    for (int i = 0; i < FIELD_SIZE; i++)
-                    //    {
-                    //        if (i == x && j == y
-                    //            && x - x_initVal < shipSize
-                    //            && points.Count < shipSize)
-                    //        {
-                    //            CheckSidesOfShip(i, j, "horizontal", field);
-                    //            x++;
-                    //        }
-                    //    }
-                    //}
-                    break;
-
-                case SOUTH:
-
-                    CheckHeadAndTailOfShip(y_initVal, x_initVal, direction, field);
-
-                    IterateField(y_initVal, direction, field);
-
-                    //for (int j = 0; j < FIELD_SIZE; j++)
-                    //{
-                    //    for (int i = 0; i < FIELD_SIZE; i++)
-                    //    {
-                    //        if (i == x && j == y
-                    //            && y - y_initVal < shipSize
-                    //            && points.Count < shipSize)
-                    //        {
-                    //            CheckSidesOfShip(i, j, "vertical",field);
-                    //            y++;
-                    //        }
-                    //    }
-                    //}
-                    break;
-
                 case WEST:
-
                     CheckHeadAndTailOfShip(y_initVal, x_initVal, direction, field);
-
                     IterateField(x_initVal, direction, field);
-
-                    //for (int j = 0; j < FIELD_SIZE; j++)
-                    //{
-                    //    for (int i = FIELD_SIZE - 1; i >= 0; i--)
-                    //    {
-                    //        if (i == x && j == y
-                    //            && x_initVal - x < shipSize
-                    //            && points.Count < shipSize)
-                    //        {
-                    //            CheckSidesOfShip(i, j, "horizontal", field);
-                    //            x--;
-                    //        }
-
-                    //    }
-                    //}
                     break;
             }
 
@@ -164,80 +92,9 @@ namespace SchiffeVersenken
 
         }
 
-        public void IterateField(int coordInitVal, int direction, int[,] field)
-        {
-            switch(direction)
-            {
-                case NORTH:
-                    for (int j = FIELD_SIZE - 1; j >= 0; j--)
-                    {
-                        for (int i = 0; i < FIELD_SIZE; i++)
-                        {
-                            if (i == x && j == y
-                                && coordInitVal - y < shipSize
-                                && points.Count < shipSize)
-                            {
-                                CheckSidesOfShip(i, j, "vertical", field);
-                                y--;
-                            }
-                        }
-                    }
-                    break;
-
-                case EAST:
-                    for (int j = 0; j < FIELD_SIZE; j++)
-                    {
-                        for (int i = 0; i < FIELD_SIZE; i++)
-                        {
-                            if (i == x && j == y
-                                && x - coordInitVal < shipSize
-                                && points.Count < shipSize)
-                            {
-                                CheckSidesOfShip(i, j, "horizontal", field);
-                                x++;
-                            }
-                        }
-                    }
-                    break;
-
-                case SOUTH:
-                    for (int j = 0; j < FIELD_SIZE; j++)
-                    {
-                        for (int i = 0; i < FIELD_SIZE; i++)
-                        {
-                            if (i == x && j == y
-                                && y - coordInitVal < shipSize
-                                && points.Count < shipSize)
-                            {
-                                CheckSidesOfShip(i, j, "vertical", field);
-                                y++;
-                            }
-                        }
-                    }
-                    break;
-
-                case WEST:
-                    for (int j = 0; j < FIELD_SIZE; j++)
-                    {
-                        for (int i = FIELD_SIZE - 1; i >= 0; i--)
-                        {
-                            if (i == x && j == y
-                                && coordInitVal - x < shipSize
-                                && points.Count < shipSize)
-                            {
-                                CheckSidesOfShip(i, j, "horizontal", field);
-                                x--;
-                            }
-
-                        }
-                    }
-                    break;
-            }
-        }
-
         public void CheckHeadAndTailOfShip(int coordY, int coordX, int direction, int[,] field)
         {
-            switch(direction)
+            switch (direction)
             {
                 case NORTH:
                     if (coordY == FIELD_SIZE - 1)
@@ -353,6 +210,77 @@ namespace SchiffeVersenken
                     break;
             }
 
+        }
+
+        public void IterateField(int coordInitVal, int direction, int[,] field)
+        {
+            switch(direction)
+            {
+                case NORTH:
+                    for (int j = FIELD_SIZE - 1; j >= 0; j--)
+                    {
+                        for (int i = 0; i < FIELD_SIZE; i++)
+                        {
+                            if (i == x && j == y
+                                && coordInitVal - y < shipSize
+                                && points.Count < shipSize)
+                            {
+                                CheckSidesOfShip(i, j, "vertical", field);
+                                y--;
+                            }
+                        }
+                    }
+                    break;
+
+                case WEST:
+                    for (int j = 0; j < FIELD_SIZE; j++)
+                    {
+                        for (int i = FIELD_SIZE - 1; i >= 0; i--)
+                        {
+                            if (i == x && j == y
+                                && coordInitVal - x < shipSize
+                                && points.Count < shipSize)
+                            {
+                                CheckSidesOfShip(i, j, "horizontal", field);
+                                x--;
+                            }
+
+                        }
+                    }
+                    break;
+
+                case EAST:
+                    for (int j = 0; j < FIELD_SIZE; j++)
+                    {
+                        for (int i = 0; i < FIELD_SIZE; i++)
+                        {
+                            if (i == x && j == y
+                                && x - coordInitVal < shipSize
+                                && points.Count < shipSize)
+                            {
+                                CheckSidesOfShip(i, j, "horizontal", field);
+                                x++;
+                            }
+                        }
+                    }
+                    break;
+
+                case SOUTH:
+                    for (int j = 0; j < FIELD_SIZE; j++)
+                    {
+                        for (int i = 0; i < FIELD_SIZE; i++)
+                        {
+                            if (i == x && j == y
+                                && y - coordInitVal < shipSize
+                                && points.Count < shipSize)
+                            {
+                                CheckSidesOfShip(i, j, "vertical", field);
+                                y++;
+                            }
+                        }
+                    }
+                    break;
+            }
         }
 
         public void CheckSidesOfShip(int i, int j, string orientation, int[,] field)
