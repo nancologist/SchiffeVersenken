@@ -75,32 +75,11 @@ namespace SchiffeVersenken
                             {
                                 if (i == 0)
                                 {
-
-                                    CheckSidesOfShip_NORTH(i, j, 1, field);
-
-                                    //if (field[j, i] != BLUE || field[j, i+1] != BLUE)
-                                    //{
-                                    //    points.Clear();
-                                    //    PlaceShip(field);
-                                    //}
-                                    //else
-                                    //{
-                                    //    points.Add(new int[] { j, i });
-                                    //}
+                                    CheckSidesOfShipAtBounderies(i, j, 1, field);
                                 }
                                 else if (i == FIELD_SIZE - 1)
                                 {
-                                    CheckSidesOfShip_NORTH(i, j, -1, field);
-
-                                    //if (field[j, i] != BLUE || field[j, i -1] != BLUE)
-                                    //{
-                                    //    points.Clear();
-                                    //    PlaceShip(field);
-                                    //}
-                                    //else
-                                    //{
-                                    //    points.Add(new int[] { j, i });
-                                    //}
+                                    CheckSidesOfShipAtBounderies(i, j, -1, field);
                                 }
                                 else
                                 {
@@ -191,27 +170,21 @@ namespace SchiffeVersenken
 
                                 if (i == 0)
                                 {
-                                    if (field[j, i] != BLUE || field[j, i + 1] != BLUE)
-                                    {
-                                        points.Clear();
-                                        PlaceShip(field);
-                                    }
-                                    else
-                                    {
-                                        points.Add(new int[] { j, i });
-                                    }
+                                    CheckSidesOfShipAtBounderies(i, j, 1, field);
                                 }
                                 else if (i == FIELD_SIZE - 1)
                                 {
-                                    if (field[j, i] != BLUE || field[j, i - 1] != BLUE)
-                                    {
-                                        points.Clear();
-                                        PlaceShip(field);
-                                    }
-                                    else
-                                    {
-                                        points.Add(new int[] { j, i });
-                                    }
+                                    CheckSidesOfShipAtBounderies(i, j, -1, field);
+
+                                    //if (field[j, i] != BLUE || field[j, i - 1] != BLUE)
+                                    //{
+                                    //    points.Clear();
+                                    //    PlaceShip(field);
+                                    //}
+                                    //else
+                                    //{
+                                    //    points.Add(new int[] { j, i });
+                                    //}
                                 }
                                 else
                                 {
@@ -259,7 +232,7 @@ namespace SchiffeVersenken
                                 }
                                 else if (j == FIELD_SIZE - 1)
                                 {
-                                    if (field[j, i] != 1 || field[j - 1, i] != 1)
+                                    if (field[j, i] != BLUE || field[j - 1, i] != BLUE)
                                     {
                                         points.Clear();
                                         PlaceShip(field);
@@ -517,7 +490,7 @@ namespace SchiffeVersenken
             }
         }
 
-        public void CheckSidesOfShip_NORTH(int i, int j, int adjacent, int[,] field)
+        public void CheckSidesOfShipAtBounderies(int i, int j, int adjacent, int[,] field)
         {
             if (field[j, i] != BLUE || field[j, i + adjacent] != BLUE)
             {
