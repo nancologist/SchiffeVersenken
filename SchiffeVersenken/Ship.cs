@@ -26,18 +26,16 @@ namespace SchiffeVersenken
         // Comfort Zone: where all the four directions are valid to place the ship
         bool xInComfortZoneLeft;
         bool xInComfortZoneRight;
+        bool xInComfortZone;
         bool yInComfortZoneTop;
         bool yInComfortZoneBottom;
-
-        bool xInComfortZone;
         bool yInComfortZone;
+        bool xAndYinComfortZone;
 
         bool inTopLeft;
         bool inTopRight;
         bool inBottomLeft;
         bool inBottomRight;
-
-        bool inComfortZone;
 
         public List<int[]> points;
 
@@ -53,7 +51,7 @@ namespace SchiffeVersenken
         public int[,] PlaceShip(int[,] field)
         {
             InitCoordinationsAndDirection();
-            direction = SetDirection();
+            direction = CorrectDirection();
 
             points = new List<int[]>();
 
@@ -62,9 +60,9 @@ namespace SchiffeVersenken
 
             switch (direction)
             {
-                case 1:
+                case NORTH:
 
-                    CheckHeadAndTail(y_initVal, x_initVal, NORTH, field);
+                    CheckHeadAndTailOfShip(y_initVal, x_initVal, NORTH, field);
 
                     for (int j = FIELD_SIZE - 1; j >= 0; j--)
                     {
@@ -77,6 +75,8 @@ namespace SchiffeVersenken
                             {
                                 if (i == 0)
                                 {
+
+
                                     if (field[j, i] != BLUE || field[j, i+1] != BLUE)
                                     {
                                         points.Clear();
@@ -118,33 +118,9 @@ namespace SchiffeVersenken
                     }
                     break;
 
-                case 2:
+                case EAST:
 
-                    if (x_initVal == 0)
-                    {
-                        if (field[y_initVal, x_initVal + shipSize] != BLUE)
-                        {
-                            points.Clear();
-                            PlaceShip(field);
-                        }
-                    }
-                    else if (x_initVal >= FIELD_SIZE - shipSize)
-                    {
-                        if (field[y_initVal, x_initVal - 1] != BLUE)
-                        {
-                            points.Clear();
-                            PlaceShip(field);
-                        }
-                    }
-                    else
-                    {
-                        if (field[y_initVal, x_initVal - 1] != BLUE ||
-                        field[y_initVal, x_initVal + shipSize] != BLUE)
-                        {
-                            points.Clear();
-                            PlaceShip(field);
-                        }
-                    }
+                    CheckHeadAndTailOfShip(y_initVal, x_initVal, EAST, field);
 
                     for (int j = 0; j < FIELD_SIZE; j++)
                     {
@@ -197,33 +173,9 @@ namespace SchiffeVersenken
                     }
                     break;
 
-                case 3:
+                case SOUTH:
 
-                    if (y_initVal == 0)
-                    {
-                        if (field[y_initVal + shipSize, x_initVal] != 1)
-                        {
-                            points.Clear();
-                            PlaceShip(field);
-                        }
-                    }
-                    else if (y_initVal >= FIELD_SIZE - shipSize)
-                    {
-                        if (field[y_initVal - 1, x_initVal] != BLUE)
-                        {
-                            points.Clear();
-                            PlaceShip(field);
-                        }
-                    }
-                    else
-                    {
-                        if (field[y_initVal - 1, x_initVal] != BLUE ||
-                        field[y_initVal + shipSize, x_initVal] != BLUE)
-                        {
-                            points.Clear();
-                            PlaceShip(field);
-                        }
-                    }
+                    CheckHeadAndTailOfShip(y_initVal, x_initVal, SOUTH, field);
 
                     for (int j = 0; j < FIELD_SIZE; j++)
                     {
@@ -279,7 +231,7 @@ namespace SchiffeVersenken
 
                 case 4:
 
-                    CheckHeadAndTail(y_initVal, x_initVal, WEST, field);
+                    CheckHeadAndTailOfShip(y_initVal, x_initVal, WEST, field);
 
                     for (int j = 0; j < FIELD_SIZE; j++)
                     {
@@ -350,134 +302,132 @@ namespace SchiffeVersenken
 
         }
 
-        public void CheckHeadAndTail(int coordY, int coordX, int orientation , int[,] field)
+        public void CheckHeadAndTailOfShip(int coordY, int coordX, int orientation , int[,] field)
         {
-            // TODO change these if-statements to switch(orientation)....
-
-            if (orientation == NORTH)
+            switch(orientation)
             {
-                if (coordY == FIELD_SIZE - 1)
-                {
-                    if (field[coordY - shipSize, coordX] != BLUE)
+                case NORTH:
+                    if (orientation == NORTH)
                     {
-                        points.Clear();
-                        PlaceShip(field);
+                        if (coordY == FIELD_SIZE - 1)
+                        {
+                            if (field[coordY - shipSize, coordX] != BLUE)
+                            {
+                                points.Clear();
+                                PlaceShip(field);
+                            }
+                        }
+                        else if (coordY < shipSize)
+                        {
+                            if (field[coordY + 1, coordX] != BLUE)
+                            {
+                                points.Clear();
+                                PlaceShip(field);
+                            }
+                        }
+                        else
+                        {
+                            if (field[coordY + 1, coordX] != BLUE ||
+                            field[coordY - shipSize, coordX] != BLUE)
+                            {
+                                points.Clear();
+                                PlaceShip(field);
+                            }
+                        }
                     }
-                }
-                else if (coordY < shipSize)
-                {
-                    if (field[coordY + 1, coordX] != BLUE)
+                    break;
+
+                case WEST:
+                    if (coordX == FIELD_SIZE - 1)
                     {
-                        points.Clear();
-                        PlaceShip(field);
+                        if (field[coordY, coordX - shipSize] != BLUE)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
                     }
-                }
-                else
-                {
-                    if (field[coordY + 1, coordX] != BLUE ||
-                    field[coordY - shipSize, coordX] != BLUE)
+                    else if (coordX < shipSize)
                     {
-                        points.Clear();
-                        PlaceShip(field);
+                        if (field[coordY, coordX + 1] != BLUE)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
                     }
-                }
+                    else
+                    {
+                        if (field[coordY, coordX + 1] != BLUE ||
+                        field[coordY, coordX - shipSize] != BLUE)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    break;
+
+                case EAST:
+                    if (coordX == 0)
+                    {
+                        if (field[coordY, coordX + shipSize] != BLUE)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    else if (coordX >= FIELD_SIZE - shipSize)
+                    {
+                        if (field[coordY, coordX - 1] != BLUE)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    else
+                    {
+                        if (field[coordY, coordX - 1] != BLUE ||
+                        field[coordY, coordX + shipSize] != BLUE)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    break;
+
+                case SOUTH:
+
+                    if (coordY == 0)
+                    {
+                        if (field[coordY + shipSize, coordX] != 1)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    else if (coordY >= FIELD_SIZE - shipSize)
+                    {
+                        if (field[coordY - 1, coordX] != BLUE)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    else
+                    {
+                        if (field[coordY - 1, coordX] != BLUE ||
+                        field[coordY + shipSize, coordX] != BLUE)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                    }
+                    break;
             }
 
-            else if (orientation == WEST)
-            {
-                if (coordX == FIELD_SIZE - 1)
-                {
-                    if (field[coordY, coordX - shipSize] != BLUE)
-                    {
-                        points.Clear();
-                        PlaceShip(field);
-                    }
-                }
-                else if (coordX < shipSize)
-                {
-                    if (field[coordY, coordX + 1] != BLUE)
-                    {
-                        points.Clear();
-                        PlaceShip(field);
-                    }
-                }
-                else
-                {
-                    if (field[coordY, coordX + 1] != BLUE ||
-                    field[coordY, coordX - shipSize] != BLUE)
-                    {
-                        points.Clear();
-                        PlaceShip(field);
-                    }
-                }
-            }
         }
 
-        public void CheckHeadAndTailsOfShip_North(int coordY, int coordX, int[,] field)
+        public int CorrectDirection()
         {
-
-            if (coordY == FIELD_SIZE - 1)
-            {
-                if (field[coordY - shipSize, coordX] != BLUE)
-                {
-                    points.Clear();
-                    PlaceShip(field);
-                }
-            }
-            else if (coordY < shipSize)
-            {
-                if (field[coordY + 1, coordX] != BLUE)
-                {
-                    points.Clear();
-                    PlaceShip(field);
-                }
-            }
-            else
-            {
-                if (field[coordY + 1, coordX] != BLUE ||
-                field[coordY - shipSize, coordX] != BLUE)
-                {
-                    points.Clear();
-                    PlaceShip(field);
-                }
-            }
-        }
-
-        public void CheckHeadAndTailsOfShip_West(int coordY, int coordX, int[,] field)
-        {
-
-            if (coordX == FIELD_SIZE - 1)
-            {
-                if (field[coordY, coordX - shipSize] != BLUE)
-                {
-                    points.Clear();
-                    PlaceShip(field);
-                }
-            }
-            else if (coordX < shipSize)
-            {
-                if (field[coordY, coordX + 1] != BLUE)
-                {
-                    points.Clear();
-                    PlaceShip(field);
-                }
-            }
-            else
-            {
-                if (field[coordY, coordX + 1] != BLUE ||
-                field[coordY, coordX - shipSize] != BLUE)
-                {
-                    points.Clear();
-                    PlaceShip(field);
-                }
-            }
-        }
-
-        // TODO noch zwei Methoden für Case 2 und Case 3
-
-        public int SetDirection()
-        {
-            if (inComfortZone) // in Region CZ
+            if (xAndYinComfortZone)
             {
                 return direction;
             }
@@ -581,7 +531,7 @@ namespace SchiffeVersenken
 
             xInComfortZone = (xInComfortZoneLeft && xInComfortZoneRight);
             yInComfortZone = (yInComfortZoneTop && yInComfortZoneBottom);
-            inComfortZone = xInComfortZone && yInComfortZone;
+            xAndYinComfortZone = xInComfortZone && yInComfortZone;
 
             inTopLeft = !xInComfortZoneLeft && !yInComfortZoneTop;
             inTopRight = !xInComfortZoneRight && !yInComfortZoneTop;
