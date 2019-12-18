@@ -62,7 +62,7 @@ namespace SchiffeVersenken
             {
                 case NORTH:
 
-                    CheckHeadAndTailOfShip(y_initVal, x_initVal, NORTH, field);
+                    CheckHeadAndTailOfShip(y_initVal, x_initVal, direction, field);
 
                     for (int j = FIELD_SIZE - 1; j >= 0; j--)
                     {
@@ -72,7 +72,7 @@ namespace SchiffeVersenken
                                 && y_initVal - y < shipSize
                                 && points.Count < shipSize)
                             {
-                                CheckSidesOfShip_NS(i, j, field);
+                                CheckSidesOfShip(i, j, "vertical",field);
                                 y--;
                             }
                         }
@@ -81,7 +81,7 @@ namespace SchiffeVersenken
 
                 case EAST:
 
-                    CheckHeadAndTailOfShip(y_initVal, x_initVal, EAST, field);
+                    CheckHeadAndTailOfShip(y_initVal, x_initVal, direction, field);
 
                     for (int j = 0; j < FIELD_SIZE; j++)
                     {
@@ -91,47 +91,30 @@ namespace SchiffeVersenken
                                 && x - x_initVal < shipSize
                                 && points.Count < shipSize)
                             {
-                                if (j == 0)
-                                {
-                                    CheckSidesOfShipAtBounderies(i, j, 1, "horizontal", field);
+                                CheckSidesOfShip(i, j, "horizontal", field);
 
-                                    //if (field[j, i] != BLUE || field[j + 1, i ] != BLUE)
-                                    //{
-                                    //    points.Clear();
-                                    //    PlaceShip(field);
-                                    //}
-                                    //else
-                                    //{
-                                    //    points.Add(new int[] { j, i });
-                                    //}
-                                }
-                                else if (j == FIELD_SIZE - 1)
-                                {
-                                    CheckSidesOfShipAtBounderies(i, j, -1, "horizontal", field);
+                                //if (j == 0)
+                                //{
+                                //    CheckSidesOfShipAtBounderies(i, j, 1, "horizontal", field);
+                                //}
+                                //else if (j == FIELD_SIZE - 1)
+                                //{
+                                //    CheckSidesOfShipAtBounderies(i, j, -1, "horizontal", field);
+                                //}
+                                //else
+                                //{
+                                //    if (field[j, i] != BLUE || field[j - 1, i ] != BLUE
+                                //        || field[j + 1, i ] != BLUE)
+                                //    {
+                                //        points.Clear();
+                                //        PlaceShip(field);
+                                //    }
+                                //    else
+                                //    {
+                                //        points.Add(new int[] { j, i });
+                                //    }
+                                //}
 
-                                    //if (field[j, i] != BLUE || field[j - 1, i ] != BLUE)
-                                    //{
-                                    //    points.Clear();
-                                    //    PlaceShip(field);
-                                    //}
-                                    //else
-                                    //{
-                                    //    points.Add(new int[] { j, i });
-                                    //}
-                                }
-                                else
-                                {
-                                    if (field[j, i] != BLUE || field[j - 1, i ] != BLUE
-                                        || field[j + 1, i ] != BLUE)
-                                    {
-                                        points.Clear();
-                                        PlaceShip(field);
-                                    }
-                                    else
-                                    {
-                                        points.Add(new int[] { j, i });
-                                    }
-                                }
                                 x++;
                             }
                         }
@@ -140,7 +123,7 @@ namespace SchiffeVersenken
 
                 case SOUTH:
 
-                    CheckHeadAndTailOfShip(y_initVal, x_initVal, SOUTH, field);
+                    CheckHeadAndTailOfShip(y_initVal, x_initVal, direction, field);
 
                     for (int j = 0; j < FIELD_SIZE; j++)
                     {
@@ -150,7 +133,7 @@ namespace SchiffeVersenken
                                 && y - y_initVal < shipSize
                                 && points.Count < shipSize)
                             {
-                                CheckSidesOfShip_NS(i, j, field);
+                                CheckSidesOfShip(i, j, "vertical",field);
                                 y++;
                             }
                         }
@@ -159,7 +142,7 @@ namespace SchiffeVersenken
 
                 case WEST:
 
-                    CheckHeadAndTailOfShip(y_initVal, x_initVal, WEST, field);
+                    CheckHeadAndTailOfShip(y_initVal, x_initVal, direction, field);
 
                     for (int j = 0; j < FIELD_SIZE; j++)
                     {
@@ -170,47 +153,31 @@ namespace SchiffeVersenken
                                 && points.Count < shipSize)
                             {
 
-                                if (j == 0)
-                                {
-                                    CheckSidesOfShipAtBounderies(i, j, 1, "horizontal", field);
+                                CheckSidesOfShip(i, j, "horizontal", field);
 
-                                    //if (field[j, i] != BLUE || field[j + 1, i] != BLUE)
-                                    //{
-                                    //    points.Clear();
-                                    //    PlaceShip(field);
-                                    //}
-                                    //else
-                                    //{
-                                    //    points.Add(new int[] { j, i });
-                                    //}
-                                }
-                                else if (j == FIELD_SIZE - 1)
-                                {
-                                    CheckSidesOfShipAtBounderies(i, j, -1, "horizontal", field);
+                                //if (j == 0)
+                                //{
+                                //    CheckSidesOfShipAtBounderies(i, j, 1, "horizontal", field);
 
-                                    //if (field[j, i] != BLUE || field[j - 1, i] != BLUE)
-                                    //{
-                                    //    points.Clear();
-                                    //    PlaceShip(field);
-                                    //}
-                                    //else
-                                    //{
-                                    //    points.Add(new int[] { j, i });
-                                    //}
-                                }
-                                else
-                                {
-                                    if (field[j, i] != BLUE || field[j - 1, i] != BLUE
-                                        || field[j + 1, i] != BLUE)
-                                    {
-                                        points.Clear();
-                                        PlaceShip(field);
-                                    }
-                                    else
-                                    {
-                                        points.Add(new int[] { j, i });
-                                    }
-                                }
+                                //}
+                                //else if (j == FIELD_SIZE - 1)
+                                //{
+                                //    CheckSidesOfShipAtBounderies(i, j, -1, "horizontal", field);
+
+                                //}
+                                //else
+                                //{
+                                //    if (field[j, i] != BLUE || field[j - 1, i] != BLUE
+                                //        || field[j + 1, i] != BLUE)
+                                //    {
+                                //        points.Clear();
+                                //        PlaceShip(field);
+                                //    }
+                                //    else
+                                //    {
+                                //        points.Add(new int[] { j, i });
+                                //    }
+                                //}
 
                                 x--;
                             }
@@ -234,7 +201,7 @@ namespace SchiffeVersenken
 
         }
 
-        public void CheckHeadAndTailOfShip(int coordY, int coordX, int direction , int[,] field)
+        public void CheckHeadAndTailOfShip(int coordY, int coordX, int direction, int[,] field)
         {
             switch(direction)
             {
@@ -357,28 +324,57 @@ namespace SchiffeVersenken
 
         }
 
-        public void CheckSidesOfShip_NS(int i, int j, int[,] field)
+        public void CheckSidesOfShip(int i, int j, string orientation, int[,] field)
         {
-            if (i == 0)
+            switch(orientation)
             {
-                CheckSidesOfShipAtBounderies(i, j, 1, "vertical", field);
-            }
-            else if (i == FIELD_SIZE - 1)
-            {
-                CheckSidesOfShipAtBounderies(i, j, -1, "vertical", field);
-            }
-            else
-            {
-                if (field[j, i] != BLUE || field[j, i - 1] != BLUE
-                    || field[j, i + 1] != BLUE)
-                {
-                    points.Clear();
-                    PlaceShip(field);
-                }
-                else
-                {
-                    points.Add(new int[] { j, i });
-                }
+                case "vertical":
+                    if (i == 0)
+                    {
+                        CheckSidesOfShipAtBounderies(i, j, 1, orientation, field);
+                    }
+                    else if (i == FIELD_SIZE - 1)
+                    {
+                        CheckSidesOfShipAtBounderies(i, j, -1, orientation, field);
+                    }
+                    else
+                    {
+                        if (field[j, i] != BLUE || field[j, i - 1] != BLUE
+                            || field[j, i + 1] != BLUE)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                        else
+                        {
+                            points.Add(new int[] { j, i });
+                        }
+                    }
+                    break;
+
+                case "horizontal":
+                    if (j == 0)
+                    {
+                        CheckSidesOfShipAtBounderies(i, j, 1, orientation, field);
+                    }
+                    else if (j == FIELD_SIZE - 1)
+                    {
+                        CheckSidesOfShipAtBounderies(i, j, -1, orientation, field);
+                    }
+                    else
+                    {
+                        if (field[j, i] != BLUE || field[j - 1, i] != BLUE
+                            || field[j + 1, i] != BLUE)
+                        {
+                            points.Clear();
+                            PlaceShip(field);
+                        }
+                        else
+                        {
+                            points.Add(new int[] { j, i });
+                        }
+                    }
+                    break;
             }
         }
 
