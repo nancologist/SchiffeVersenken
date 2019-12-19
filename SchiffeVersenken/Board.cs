@@ -5,7 +5,7 @@ namespace SchiffeVersenken
 {
     public class Board
     {
-        private const int FIELD_SIZE = 10;
+        public const int FIELD_SIZE = 10;
         private const int ON_TARGET = 3;
         private const int OFF_TARGET = 2;
 
@@ -75,11 +75,11 @@ namespace SchiffeVersenken
                 hiddenField[inputPoint[0], inputPoint[1]] = OFF_TARGET;
             }
 
-            Console.WriteLine("   0   1   2   3   4   " +
+            Console.WriteLine("\t  0   1   2   3   4   " +
                 "5   6    7   8    9\n");
             for (int y = 0; y < hiddenField.GetLength(0); y++)
             {
-                Console.Write(y + "  ");
+                Console.Write(y + "\t");
                 for (int x = 0; x < hiddenField.GetLength(1); x++)
                 {
 
@@ -108,7 +108,7 @@ namespace SchiffeVersenken
         }
 
 
-        public void PositionShipsOnField()
+        public void ShowShipsOnField()
         {
 
             for (int y = 0; y < field.GetLength(0); y++)
@@ -127,17 +127,17 @@ namespace SchiffeVersenken
                 foreach (int[] point in ship.points)
                 {
                     Console.Write($"(j={point[0]}, i={point[1]}), ");
-                    
+
                 }
                 Console.WriteLine("\n################################");
                 Console.WriteLine("\n");
             }
 
-            Console.WriteLine("   0   1   2   3   4   " +
+            Console.WriteLine("\t   0   1   2   3   4   " +
                                 "5   6    7   8    9\n");
             for (int y = 0; y < field.GetLength(0); y++)
             {
-                Console.Write(y + "  ");
+                Console.Write(y + "\t");
                 for (int x = 0; x < field.GetLength(1); x++)
                 {
                     

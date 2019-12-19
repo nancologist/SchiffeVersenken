@@ -8,7 +8,7 @@ namespace SchiffeVersenken
         {
 
             Board board = new Board();
-            board.PositionShipsOnField();
+            board.ShowShipsOnField();
             Console.WriteLine("\n\n\n");
 
             Board.InitHiddenField();

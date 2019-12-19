@@ -7,7 +7,7 @@ namespace SchiffeVersenken
     // Todo All magic numbers should be replaced 
     public class Ship
     {
-        private const int FIELD_SIZE = 10;
+        private int FIELD_SIZE;
 
         const int NORTH = 1;
         const int EAST = 2;
@@ -46,6 +46,7 @@ namespace SchiffeVersenken
             
             this.shipSize = shipSize;
             color = shipSize;
+            FIELD_SIZE = Board.FIELD_SIZE;
         }
 
         public int[,] PlaceShip(int[,] field)
