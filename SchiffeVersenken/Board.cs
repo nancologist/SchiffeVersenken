@@ -6,8 +6,8 @@ namespace SchiffeVersenken
     public class Board
     {
         public const int FIELD_SIZE = 10;
-        private const int ON_TARGET = 3;
-        private const int OFF_TARGET = 2;
+        private const int ON_TARGET = 7;
+        private const int OFF_TARGET = 6;
 
         public Ship ship5;
         public Ship ship4_1;
@@ -75,36 +75,8 @@ namespace SchiffeVersenken
                 hiddenField[inputPoint[0], inputPoint[1]] = OFF_TARGET;
             }
 
-            Console.WriteLine("\t  0   1   2   3   4   " +
-                "5   6    7   8    9\n");
-            for (int y = 0; y < hiddenField.GetLength(0); y++)
-            {
-                Console.Write(y + "\t");
-                for (int x = 0; x < hiddenField.GetLength(1); x++)
-                {
 
-                    switch (hiddenField[y, x])
-                    {
-                        case 1: // sea
-                            Console.BackgroundColor = ConsoleColor.Blue;
-                            break;
-
-                        case 2: // shoot off target
-                            Console.BackgroundColor = ConsoleColor.Gray;
-                            break;
-
-                        case 3: //bingo
-                            Console.BackgroundColor = ConsoleColor.Red;
-                            break;
-
-                    }
-                    Console.Write("  ");
-
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    Console.Write("  ");
-                }
-                Console.Write("\n\n");
-            }
+            MapShipsAndShotsToConsole(hiddenField);
         }
 
 
@@ -123,25 +95,33 @@ namespace SchiffeVersenken
             {
                 field = ship.PlaceShip(field);
 
-                Console.Write("Points -->");
-                foreach (int[] point in ship.points)
-                {
-                    Console.Write($"(j={point[0]}, i={point[1]}), ");
+                // - DEBUG - 
+                //Console.Write("Points -->");
+                //foreach (int[] point in ship.points)
+                //{
+                //    Console.Write($"(j={point[0]}, i={point[1]}), ");
 
-                }
-                Console.WriteLine("\n################################");
-                Console.WriteLine("\n");
+                //}
+                //Console.WriteLine("\n################################");
+                //Console.WriteLine("\n");
             }
 
+            MapShipsAndShotsToConsole(field);
+
+
+        }
+
+        private static void MapShipsAndShotsToConsole(int[,] arr)
+        {
             Console.WriteLine("\t   0   1   2   3   4   " +
                                 "5   6    7   8    9\n");
-            for (int y = 0; y < field.GetLength(0); y++)
+            for (int y = 0; y < arr.GetLength(0); y++)
             {
                 Console.Write(y + "\t");
-                for (int x = 0; x < field.GetLength(1); x++)
+                for (int x = 0; x < arr.GetLength(1); x++)
                 {
-                    
-                    switch (field[y, x])
+
+                    switch (arr[y, x])
                     {
                         case 1: // sea
                             Console.BackgroundColor = ConsoleColor.Blue;
@@ -163,6 +143,14 @@ namespace SchiffeVersenken
                             Console.BackgroundColor = ConsoleColor.DarkRed;
                             break;
 
+                        case OFF_TARGET: // shoot off target
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            break;
+
+                        case ON_TARGET: //bingo
+                            Console.BackgroundColor = ConsoleColor.Red;
+                            break;
+
                     }
                     Console.Write("  ");
 
@@ -171,7 +159,6 @@ namespace SchiffeVersenken
                 }
                 Console.Write("\n\n");
             }
-
         }
     }
 }
