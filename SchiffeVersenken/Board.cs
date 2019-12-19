@@ -78,9 +78,8 @@ namespace SchiffeVersenken
             }
 
 
-            MapShipsAndShotsToConsole(hiddenField);
+            MapToConsole(hiddenField);
         }
-
 
         public void ShowShipsOnField()
         {
@@ -108,12 +107,21 @@ namespace SchiffeVersenken
                 //Console.WriteLine("\n");
             }
 
-            MapShipsAndShotsToConsole(field);
-
-
+            MapToConsole(field);
         }
 
-        private static void MapShipsAndShotsToConsole(int[,] arr)
+        public int CountBlocksToHit()
+        {
+            int blocksToHit = 0;
+
+            foreach(Ship ship in ships)
+            {
+                blocksToHit += ship.points.Count;
+            }
+            return blocksToHit;
+        }
+
+        public static void MapToConsole(int[,] arr)
         {
             Console.WriteLine("\t   0   1   2   3   4   " +
                                 "5   6    7   8    9\n");

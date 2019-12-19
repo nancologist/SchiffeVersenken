@@ -1,4 +1,5 @@
 ﻿using System;
+using static SchiffeVersenken.Board;
 
 namespace SchiffeVersenken
 {
@@ -10,14 +11,10 @@ namespace SchiffeVersenken
             Board board = new Board();
             board.ShowShipsOnField();
             Console.WriteLine("\n\n\n");
-
-            Board.CheckShots();
+            MapToConsole(hiddenField);
 
             Player player1 = new Player();
-
             player1.Play(board);
-
-            //PlayGround.TestArrayEqauls();
 
             Console.ReadLine();
         }

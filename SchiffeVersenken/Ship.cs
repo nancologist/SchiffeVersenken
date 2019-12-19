@@ -80,8 +80,8 @@ namespace SchiffeVersenken
             }
 
             // - DEBUG -
-            Console.WriteLine($"ship size: {shipSize}\nx0: {x_initVal}, y0: " +
-                $"{y_initVal}\ndirection: {direction}");
+            //Console.WriteLine($"ship size: {shipSize}\nx0: {x_initVal}, y0: " +
+            //    $"{y_initVal}\ndirection: {direction}");
             
 
             foreach (int[] coord in points)
