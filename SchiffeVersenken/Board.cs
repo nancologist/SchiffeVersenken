@@ -63,16 +63,18 @@ namespace SchiffeVersenken
             };
         }
 
-        public static void InitHiddenField(int[] inputPoint = null, bool hitShip = false)
+        public static void CheckShots(int[] inputPoint = null, bool hitShip = false)
         {
-            if (inputPoint != null && hitShip)
+            if (inputPoint != null)
             {
-                hiddenField[inputPoint[0], inputPoint[1]] = ON_TARGET;
-            }
-            
-            if (inputPoint != null && !hitShip)
-            {
-                hiddenField[inputPoint[0], inputPoint[1]] = OFF_TARGET;
+                if (hitShip)
+                {
+                    hiddenField[inputPoint[0], inputPoint[1]] = ON_TARGET;
+                }
+                else
+                {
+                    hiddenField[inputPoint[0], inputPoint[1]] = OFF_TARGET;
+                }
             }
 
 

@@ -5,15 +5,17 @@ namespace SchiffeVersenken
 {
     public class Player
     {
-        public static int bingo;
+        public int countHits;
+
 
         public Player()
         {
+            countHits = 0;
         }
 
-        public static void Play(Board board)
+        public void Play(Board board)
         {
-            while (true)
+            while (countHits < 30)
             {
                 int x = -1;
                 int y = -1;
@@ -48,7 +50,7 @@ namespace SchiffeVersenken
             }
         }
 
-        public static void AskUserToShoot(int x, int y, Board board)
+        public void AskUserToShoot(int x, int y, Board board)
         {
             Console.ForegroundColor = ConsoleColor.Green;
 
@@ -68,8 +70,13 @@ namespace SchiffeVersenken
                 {
                     if (Enumerable.SequenceEqual(point, shot))
                     {
+                        countHits++;
+                        Console.WriteLine("Number of hits:" + countHits);
+
                         isShiptHit = true;
-                        Board.InitHiddenField(point, isShiptHit);
+                        Board.CheckShots(point, isShiptHit);
+
+                        ship.points.Remove(point);
 
                         break;
                     }
@@ -78,7 +85,7 @@ namespace SchiffeVersenken
 
             }
 
-            Board.InitHiddenField(shot, isShiptHit);
+            Board.CheckShots(shot, isShiptHit);
 
         }
 

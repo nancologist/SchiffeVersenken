@@ -11,9 +11,11 @@ namespace SchiffeVersenken
             board.ShowShipsOnField();
             Console.WriteLine("\n\n\n");
 
-            Board.InitHiddenField();
+            Board.CheckShots();
 
-            Player.Play(board);
+            Player player1 = new Player();
+
+            player1.Play(board);
 
             //PlayGround.TestArrayEqauls();
 
