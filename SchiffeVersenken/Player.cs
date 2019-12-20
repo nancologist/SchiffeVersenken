@@ -52,7 +52,7 @@ namespace SchiffeVersenken
                     }
                     else
                     {
-                        Console.WriteLine("You left the game... :(");
+                        Console.WriteLine($"{name} left the game... :(");
                         break;
                     }
                 }  
@@ -60,7 +60,7 @@ namespace SchiffeVersenken
 
             if (countHits >= board.CountBlocksToHit())
             {
-                Console.WriteLine("~~~~~ YOU WON! ~~~~~");
+                Console.WriteLine($"~~~~~ YOU WON {name}! ~~~~~");
                 Console.WriteLine($"Total shots = {totalShots}");
             }
         }
