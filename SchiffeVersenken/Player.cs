@@ -15,8 +15,7 @@ namespace SchiffeVersenken
 
         public void Play(Board board)
         {
-            Console.WriteLine("kjkj ->" + board.CountBlocksToHit());
-            while (countHits < 30)
+            while (countHits < board.CountBlocksToHit())
             {
                 int x = -1;
                 int y = -1;
@@ -48,6 +47,11 @@ namespace SchiffeVersenken
                         break;
                     }
                 }  
+            }
+
+            if (countHits >= board.CountBlocksToHit())
+            {
+                Console.WriteLine("~~~~~ YOU WON! ~~~~~");
             }
         }
 
