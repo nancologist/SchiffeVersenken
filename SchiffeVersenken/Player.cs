@@ -5,12 +5,20 @@ namespace SchiffeVersenken
 {
     public class Player
     {
+        public string name;
         public int countHits;
+        public int totalShots; //Negative score for the player.
+        public static int playerId = 1;
 
 
         public Player()
         {
+            Console.Write($"Player{playerId}, enter your name: ");
+            this.name = Console.ReadLine();
+
+            playerId++;
             countHits = 0;
+            totalShots = 0;
         }
 
         public void Play(Board board)
@@ -23,6 +31,7 @@ namespace SchiffeVersenken
                 try
                 {
                     AskUserToShoot(x, y, board);
+                    totalShots++;
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -52,6 +61,7 @@ namespace SchiffeVersenken
             if (countHits >= board.CountBlocksToHit())
             {
                 Console.WriteLine("~~~~~ YOU WON! ~~~~~");
+                Console.WriteLine($"Total shots = {totalShots}");
             }
         }
 
