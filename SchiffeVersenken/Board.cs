@@ -32,7 +32,7 @@ namespace SchiffeVersenken
             {
                 for (int x = 0; x < FIELD_SIZE; x++)
                 {
-                    hiddenField[y, x] = 1;
+                    hiddenField[y, x] = BLUE;
                 }
             }
         }

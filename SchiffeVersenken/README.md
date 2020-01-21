@@ -24,9 +24,9 @@ Diese Method ist für das Terminal (die Konsole) und die UI zuständing.
 Sie erfragt die X und Y Koordination des Schusses und liest die Antwort des Spielers.
 
 Demnach wird die Methode ``CheckShots()`` aus der Klasse ``Board`` aufgerufen zu prüfen ob ein Schiff auf dem Feld getroffen ist oder nicht.
+___
+___
 
-___
-___
 ## 2.2. Board
 * In dieser Klasse werden die 10 Schiffe instanziiert.
 
@@ -69,25 +69,31 @@ ___
 
 ### ``MapToConsole()``
 Diese Methode ist für die Farben und Darstellung der Felder auf dem Terminal bzw. die UI zuständing.
+___
+___
 
+## 2.3. Ship
+Da sind die niedrigsten (low level) Codes und die längste Klasse mit etwa 450 Zeilen in meiner Applikation. 
+
+Die Klasse braucht vielleicht eine Bearbeitung und kann vielleicht auch in mehrere Klassen aufgeteilt werden.
 
 ___
 ___
 ___
-# 2. Die Fragen
-## 2.1. Womit hatten Sie Schwierigkeiten und wie haben Sie diese gelöst?
+# 3. Die Fragen
+## 3.1. Womit hatten Sie Schwierigkeiten und wie haben Sie diese gelöst?
 Ich habe mit den Bedingungen Probleme gehabt. Mit sämtlichen boolischen Variablen habe ich das gelöst!
 ___
 
-## 2.2. Was ist Ihnen besonders gut gelungen?
+## 3.2. Was ist Ihnen besonders gut gelungen?
 Ich kann mich nicht erinnern, es ist lange her.
 ___
 
-## 2.3. Womit sind Sie nicht so zufrieden?
+## 3.3. Womit sind Sie nicht so zufrieden?
 Mit dem Entwurfsmuster meines Programms. Deswegen habe ich teilweise versucht aus dem Code in den sehr langen Methoden kleineren Methoden zu bauen.
 ___
 
-## 2.4. Was haben Sie als Zusatz in Ihre Lösung hinzugefügt?
+## 3.4. Was haben Sie als Zusatz in Ihre Lösung hinzugefügt?
 Nichts Besonderes.
 
 Aber wenn der Spieler beim Spiel eine falsche Taste oder eine falsche Zahl für die Koordination der Schüsse eingibt, wird er gefragt ob er das Spiel verlassen will oder nicht und das Programm schmeißt ihn dank der ``try/catch``-Anweisung nicht raus.
