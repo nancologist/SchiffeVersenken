@@ -8,6 +8,8 @@ namespace SchiffeVersenken
         public const int FIELD_SIZE = 10;
         private const int ON_TARGET = 7;
         private const int OFF_TARGET = 6;
+        private const int BLUE = 1;
+
 
         public Ship ship5;
         public Ship ship4_1;
@@ -88,7 +90,7 @@ namespace SchiffeVersenken
             {
                 for (int x = 0; x < field.GetLength(1); x++)
                 {
-                    field[y, x] = 1;
+                    field[y, x] = BLUE;
                 }
             }
 
@@ -123,8 +125,8 @@ namespace SchiffeVersenken
 
         public static void MapToConsole(int[,] arr)
         {
-            Console.WriteLine("\t   0   1   2   3   4   " +
-                                "5   6    7   8    9\n");
+            Console.WriteLine("\t0   1   2   3   4   " +
+                                "5   6   7   8    9\n");
             for (int y = 0; y < arr.GetLength(0); y++)
             {
                 Console.Write(y + "\t");

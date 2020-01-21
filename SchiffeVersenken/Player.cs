@@ -23,7 +23,7 @@ namespace SchiffeVersenken
 
         public void Play(Board board)
         {
-            while (countHits < board.CountBlocksToHit())
+            while (countHits < 30)
             {
                 int x = -1;
                 int y = -1;

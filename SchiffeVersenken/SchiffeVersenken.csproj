@@ -38,7 +38,8 @@
     <Compile Include="PlayGround.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.txt" />
+    <None Include="README.md" />
+    <None Include="Regions.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
